@@ -1,0 +1,14 @@
+// Modules
+
+node_modules
+
+// Secret data
+
+config.json
+config
+.env
+
+// Yarn
+
+yarn.lock
+yarn-error.log
