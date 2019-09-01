@@ -12,3 +12,9 @@ config
 
 yarn.lock
 yarn-error.log
+
+// Tests
+
+tests/
+test.ts
+*test

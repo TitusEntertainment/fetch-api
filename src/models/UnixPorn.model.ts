@@ -6,6 +6,7 @@ const UnixPornSchema: Schema = new Schema({
     title: { type: String, required: true },
     body: String,
     url: { type: String, required: true },
+    thumbnail: { type: String },
     image: { type: String, required: true },
     subreddit: String,
   },

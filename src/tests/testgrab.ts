@@ -9,8 +9,12 @@ const getPosts = async () => {
   await fetch(REDDIT_URL)
     .then(res => res.json())
     .then(json => {
+      const reg = new RegExp('^(?=.*\\.(png|jpg|gif)($|\\?)).*');
       const posts = json.data.children.map(post => post.data);
-      console.log(posts);
+      posts.forEach(post => {
+        if (!reg.test(post.url)) return;
+        console.log(post.url);
+      });
     });
 };
 
