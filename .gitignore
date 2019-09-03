@@ -18,3 +18,7 @@ yarn-error.log
 tests/
 test.ts
 *test
+
+// other
+dist/
+dist

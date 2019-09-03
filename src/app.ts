@@ -6,7 +6,9 @@ import cors from 'cors';
 import { init } from './util/init';
 import fetch from 'node-fetch';
 import ms = require('ms');
+import rateLimit from 'express-rate-limit';
 
+// Models
 import UnixModel from './models/UnixPorn.model';
 import MemeModel from './models/Meme.model';
 import NsfwModel from './models/Nsfw.model';
@@ -24,14 +26,19 @@ const db = async () => {
 };
 db();
 
-// Security and Corsrong data
+// Security (helmet), cors and rate limiting
 app.use(helmet());
 app.use(cors());
+const limiter: rateLimit = rateLimit({
+  windowMs: ms('5m'),
+  max: 150,
+});
+app.use('/api/', limiter);
 
 // Routes
 
 app.use(
-  '/graphql',
+  '/api',
   graphqlHTTP({
     schema,
     graphiql: true,
@@ -40,15 +47,15 @@ app.use(
 
 // Fetching
 
-const UNIXPORNURL = 'https://www.reddit.com/r/unixporn.json?limit=50&sort=hot&raw_json=1';
-const DANKMEMESURL = 'https://www.reddit.com/r/dankmemes.json?limit=50&sort=hot&raw_json=1';
-const nsfwArray = [
+const UNIXPORNURL: String = 'https://www.reddit.com/r/unixporn.json?limit=50&sort=hot&raw_json=1';
+const DANKMEMESURL: String = 'https://www.reddit.com/r/dankmemes.json?limit=50&sort=hot&raw_json=1';
+const nsfwArray: String[] = [
   'https://www.reddit.com/r/Hentai.json?limit=50&sort=hot&raw_json=1',
   'https://www.reddit.com/r/nsfw.json?limit=50&sort=hot&raw_json=1',
   'https://www.reddit.com/r/thic_hentai.json?limit=50&sort=hot&raw_json=1',
 ];
 
-const getPosts = async (url, model) => {
+const getPosts: Function = async (url: string, model: any) => {
   console.log('Fetching a new set of posts');
   await fetch(url)
     .then(res => res.json())
