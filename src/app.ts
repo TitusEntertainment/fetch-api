@@ -34,6 +34,9 @@ app.use(
   session({
     name: 'sessionId',
     secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true },
   })
 );
 const limiter: rateLimit = rateLimit({
