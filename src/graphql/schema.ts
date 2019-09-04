@@ -3,6 +3,7 @@ import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID } from 'grap
 import NsfwModel from '../models/Nsfw.model';
 import UnixPornModel from '../models/UnixPorn.model';
 import MemeModel from '../models/Meme.model';
+import { cacheInterface } from '../models/interface';
 
 const DataType = new GraphQLObjectType({
   name: 'Data',

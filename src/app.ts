@@ -7,13 +7,14 @@ import { init } from './util/init';
 import fetch from 'node-fetch';
 import ms = require('ms');
 import rateLimit from 'express-rate-limit';
+import session from 'express-session';
 
 // Models
 import UnixModel from './models/UnixPorn.model';
 import MemeModel from './models/Meme.model';
 import NsfwModel from './models/Nsfw.model';
-
-const PORT = 3200 || process.env.PORT;
+import { cacheInterface } from './models/interface';
+import { Schema, Document } from 'mongoose';
 
 // Dotenv config
 require('dotenv').config();
@@ -29,6 +30,12 @@ db();
 // Security (helmet), cors and rate limiting
 app.use(helmet());
 app.use(cors());
+app.use(
+  session({
+    name: 'sessionId',
+    secret: process.env.SESSION_SECRET,
+  })
+);
 const limiter: rateLimit = rateLimit({
   windowMs: ms('5m'),
   max: 150,
@@ -64,7 +71,7 @@ const getPosts: Function = async (url: string, model: any) => {
       posts.forEach(async doc => {
         const reg = new RegExp('^(?=.*\\.(png|jpg|gif)($|\\?)).*');
         if (!reg.test(doc.url)) return;
-        const newModel = await new model({
+        const newModel: cacheInterface = await new model({
           data: {
             title: doc.title,
             body: doc.selftext,
@@ -80,9 +87,14 @@ const getPosts: Function = async (url: string, model: any) => {
 };
 
 async function allPosts() {
-  await UnixModel.deleteMany({});
-  await MemeModel.deleteMany({});
-  await NsfwModel.deleteMany({});
+  try {
+    await UnixModel.deleteMany({});
+    await MemeModel.deleteMany({});
+    await NsfwModel.deleteMany({});
+  } catch (error) {
+    console.log('Something went wrong deleting the previous collections');
+    console.error(error);
+  }
   getPosts(DANKMEMESURL, MemeModel);
   getPosts(nsfwArray[0], NsfwModel);
   getPosts(nsfwArray[1], NsfwModel);
@@ -92,5 +104,7 @@ async function allPosts() {
 
 allPosts();
 setInterval(allPosts, ms('12 h'));
+
+const PORT = 3200 || process.env.PORT;
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));

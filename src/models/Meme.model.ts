@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 import timestamp = require('mongoose-timestamp');
 
 const MemeSchema: Schema = new Schema({
