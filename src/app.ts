@@ -14,7 +14,6 @@ import UnixModel from './models/UnixPorn.model';
 import MemeModel from './models/Meme.model';
 import NsfwModel from './models/Nsfw.model';
 import { cacheInterface } from './models/interface';
-import { Schema, Document } from 'mongoose';
 
 // Dotenv config
 require('dotenv').config();
@@ -75,13 +74,11 @@ const getPosts: Function = async (url: string, model: any) => {
         const reg = new RegExp('^(?=.*\\.(png|jpg|gif)($|\\?)).*');
         if (!reg.test(doc.url)) return;
         const newModel: cacheInterface = await new model({
-          data: {
-            title: doc.title,
-            body: doc.selftext,
-            url: doc.permalink,
-            thumbnail: doc.thumbnail,
-            image: doc.url,
-          },
+          title: doc.title,
+          body: doc.selftext,
+          url: doc.permalink,
+          thumbnail: doc.thumbnail,
+          image: doc.url,
         });
         newModel.save().catch(e => console.error(e));
       });
@@ -106,7 +103,7 @@ async function allPosts() {
 }
 
 allPosts();
-setInterval(allPosts, ms('12 h'));
+setInterval(allPosts, ms('6 hrs'));
 
 const PORT = 3200 || process.env.PORT;
 

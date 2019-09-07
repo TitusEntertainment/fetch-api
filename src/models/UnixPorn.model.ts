@@ -2,14 +2,10 @@ import { Schema, model } from 'mongoose';
 import timestamp = require('mongoose-timestamp');
 
 const UnixPornSchema: Schema = new Schema({
-  data: {
-    title: { type: String, required: true },
-    body: String,
-    url: { type: String, required: true },
-    thumbnail: { type: String },
-    image: { type: String, required: true },
-    subreddit: String,
-  },
+  title: { type: String, required: true },
+  body: String,
+  url: { type: String, required: true },
+  image: { type: String, required: true },
   timestamp: { type: Date, default: Date.now() },
 });
 
