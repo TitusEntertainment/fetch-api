@@ -5,8 +5,8 @@ import UnixPornModel from '../models/UnixPorn.model';
 import MemeModel from '../models/Meme.model';
 import { cacheInterface } from '../models/interface';
 
-const DataType = new GraphQLObjectType({
-  name: 'Data',
+const CacheType = new GraphQLObjectType({
+  name: 'Cache',
   fields: () => ({
     title: { type: GraphQLString },
     body: { type: GraphQLString },
@@ -15,27 +15,19 @@ const DataType = new GraphQLObjectType({
   }),
 });
 
-const CacheType = new GraphQLObjectType({
-  name: 'Cache',
-  fields: () => ({
-    id: { type: GraphQLID },
-    data: { type: DataType },
-  }),
-});
-
 const RootQuery: GraphQLObjectType = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
     meme: {
       type: CacheType,
-      async resolve() {
+      async resolve(parent, args) {
         const data = await MemeModel.find({});
         return data[Math.floor(Math.random() * data.length)];
       },
     },
     nsfw: {
       type: CacheType,
-      async resolve() {
+      async resolve(parent, args) {
         const data = await NsfwModel.find({});
         return data[Math.floor(Math.random() * data.length)];
       },

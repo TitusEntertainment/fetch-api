@@ -27,12 +27,13 @@ const db = async () => {
 db();
 
 // Security (helmet), cors and rate limiting
+const secret = '12312asdwedqeWEQEQWE1' || process.env.SESSION_SECRET;
 app.use(helmet());
 app.use(cors());
 app.use(
   session({
     name: 'sessionId',
-    secret: process.env.SESSION_SECRET,
+    secret,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: true },
@@ -42,7 +43,7 @@ const limiter: rateLimit = rateLimit({
   windowMs: ms('5m'),
   max: 150,
 });
-app.use('/api/', limiter);
+app.use('/api', limiter);
 
 // Routes
 
