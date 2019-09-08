@@ -80,6 +80,7 @@ const getPosts: Function = async (url: string, model: any) => {
           subreddit: doc.permalink,
           thumbnail: doc.thumbnail,
           image: doc.url,
+          timestamp: Date.now(),
         });
         newModel.save().catch(e => console.error(e));
       });
