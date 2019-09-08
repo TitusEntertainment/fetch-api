@@ -14,6 +14,7 @@ import UnixModel from './models/UnixPorn.model';
 import MemeModel from './models/Meme.model';
 import NsfwModel from './models/Nsfw.model';
 import { cacheInterface } from './models/interface';
+import HentaiModel from './models/Hentai.model';
 
 // Dotenv config
 require('dotenv').config();
@@ -101,6 +102,8 @@ async function allPosts() {
   getPosts(nsfwArray[0], NsfwModel);
   getPosts(nsfwArray[1], NsfwModel);
   getPosts(nsfwArray[2], NsfwModel);
+  getPosts(nsfwArray[0], HentaiModel);
+  getPosts(nsfwArray[2], HentaiModel);
   getPosts(UNIXPORNURL, UnixModel);
 }
 

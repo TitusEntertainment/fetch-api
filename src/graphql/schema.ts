@@ -3,7 +3,8 @@ import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID } from 'grap
 import NsfwModel from '../models/Nsfw.model';
 import UnixPornModel from '../models/UnixPorn.model';
 import MemeModel from '../models/Meme.model';
-import { cacheInterface } from '../models/interface';
+import HentaiModel from '../models/Hentai.model';
+import { resolve } from 'dns';
 
 const CacheType = new GraphQLObjectType({
   name: 'Cache',
@@ -29,6 +30,13 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
       type: CacheType,
       async resolve(parent, args) {
         const data = await NsfwModel.find({});
+        return data[Math.floor(Math.random() * data.length)];
+      },
+    },
+    hentai: {
+      type: CacheType,
+      async resolve(parents, args) {
+        const data = await HentaiModel.find({});
         return data[Math.floor(Math.random() * data.length)];
       },
     },
