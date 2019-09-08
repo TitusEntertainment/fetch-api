@@ -77,7 +77,7 @@ const getPosts: Function = async (url: string, model: any) => {
         const newModel: cacheInterface = await new model({
           title: doc.title,
           body: doc.selftext,
-          url: doc.permalink,
+          subreddit: doc.permalink,
           thumbnail: doc.thumbnail,
           image: doc.url,
         });
