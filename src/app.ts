@@ -58,9 +58,9 @@ app.use(
 
 // Fetching
 
-const UNIXPORNURL: String = 'https://www.reddit.com/r/unixporn.json?limit=50&sort=hot&raw_json=1';
-const DANKMEMESURL: String = 'https://www.reddit.com/r/dankmemes.json?limit=50&sort=hot&raw_json=1';
-const nsfwArray: String[] = [
+const UNIXPORNURL: string = 'https://www.reddit.com/r/unixporn.json?limit=50&sort=hot&raw_json=1';
+const DANKMEMESURL: string = 'https://www.reddit.com/r/dankmemes.json?limit=50&sort=hot&raw_json=1';
+const nsfwArray: string[] = [
   'https://www.reddit.com/r/Hentai.json?limit=50&sort=hot&raw_json=1',
   'https://www.reddit.com/r/nsfw.json?limit=50&sort=hot&raw_json=1',
   'https://www.reddit.com/r/thic_hentai.json?limit=50&sort=hot&raw_json=1',
