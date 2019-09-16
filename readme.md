@@ -1,8 +1,8 @@
 # Open source reddit caching api
 
-This open source api fetches and caches from a set of subredits from [reddit](https://reddit.com) and caches them every six hours! It then allows you/the user to fetch a random post!
+This open source api fetches and caches from a set of subreddits from [reddit](https://reddit.com) and caches them every six hours! It then allows you, the user to fetch a random post!
 
-> Want a another subreddit to be cached? Make an issue and or a pull request.
+> Want another subreddit to be cached? Make an issue, or a pull request.
 
 **Current queries**:
 
@@ -14,13 +14,13 @@ unixporn, nsfw, meme, hentai
 
 begin by doing the following command in your project directory
 
-    npm i node-fetch
+`npm i node-fetch`
 
 or if you use yarn
 
-    yarn add node-fetch
+`yarn add node-fetch`
 
-now that we have all the dependecies we need, we'll make a js file!
+now that we have all the dependencies we need, we'll make a js file!
 
 so in our js file we will begin by doing
 
@@ -28,7 +28,7 @@ so in our js file we will begin by doing
 const fetch = require('node-fetch');
 ```
 
-now let's tell the api what we want back from it! For this example we will be fetching a random cached post from r/unixporn
+now let's tell the api what we want back from it! For this example we'll be fetching a random cached post from r/unixporn
 
 ```js
 const fetch = require('node-fetch');
@@ -44,9 +44,9 @@ const query = `
 `;
 ```
 
-Note: the api is built with Graphql so what we define above is exatly what we will get back!
+Note: the api is built with GraphQL so what we define above, is exatly what we will get back!
 
-alright so now lets make sure that we'll fetch properly via a post request.
+alright, so now lets make sure that we'll fetch properly via a post request.
 
 ```js
 const fetch = require('node-fetch');
@@ -68,7 +68,7 @@ const options = {
 };
 ```
 
-The above is what we will pass in once we do the post request (note that the post request will also send back the data that we want). So let's do it!
+The above is what we'll pass in, once we do the post request (note that the post request will also send back the data that we want). So let's do it!
 
 ```js
 const fetch = require('node-fetch');
@@ -89,14 +89,14 @@ const options = {
   body: JSON.stringify({ query })
 };
 
-// note that the url bellow is what's hosted currently! If you self host this url will be diffirent
+// note that the url bellow is what's hosted currently! If you self-host this url will be different
 
 fetch('http://titusentertainment.xyz:3200/api', options)
   .then(res => res.json())
   .then(res => console.log(res.data));
 ```
 
-and were done!
+and we're done!
 
 Output example:
 
@@ -128,9 +128,9 @@ All queries follow this pattern:
 
 ## Selfhosting
 
-First of all make sure that you either have [mongoDB](https://mongodb.com) either installed or a [mongoDB atlas](https://www.mongodb.com/cloud/atlas) apllication registered
+First of all, make sure that you either have [mongoDB](https://mongodb.com) either installed or a [mongoDB atlas](https://www.mongodb.com/cloud/atlas) apllication registered
 
-Begin by opening a terminal and cd to the desired path where you will store the files.
+Begin by opening a terminal and `cd` to the desired path where you will store the files.
 
 Then do:
 
@@ -138,13 +138,13 @@ Then do:
 git clone https://github.com/TitusEntertainment/fetch-api/blob/master/src/app.ts
 ```
 
-and then cd into by doing
+and then `cd` into by doing
 
 ```bash
 cd fetch-api
 ```
 
-install the dependecies:
+install the dependencies:
 
 npm:
 
@@ -158,7 +158,7 @@ or with yarn
 yarn install
 ```
 
-while were at it we're going to install [typescript](https://www.npmjs.com/package/typescript) globaly as well because we'll need to compile the ts code into js. We will also throw in [pm2](https://www.npmjs.com/search?q=pm2) and [@types/node](https://www.npmjs.com/package/@types/node)
+while we're at it, we're going to install [typescript](https://www.npmjs.com/package/typescript) globaly as well because we'll need to compile the ts code into js. We'll also throw in [pm2](https://www.npmjs.com/search?q=pm2) and [@types/node](https://www.npmjs.com/package/@types/node)
 
 ```bash
 npm i -g typescript @types/node pm2
@@ -166,7 +166,7 @@ npm i -g typescript @types/node pm2
 
 now procede to create a file in the root directory called **.env**
 
-In here we will define, a session secret (this is for security) and our url to mongoDB
+In here, we will define a session secret (this is for security) and our url to MongoDB
 
 the file should look like this:
 
