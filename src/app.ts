@@ -10,11 +10,8 @@ import rateLimit from 'express-rate-limit';
 import session from 'express-session';
 
 // Models
-import UnixModel from './models/UnixPorn.model';
-import MemeModel from './models/Meme.model';
-import NsfwModel from './models/Nsfw.model';
+import { NsfwModel, UnixPornModel, MemeModel, HentaiModel } from './models/CacheModels';
 import { cacheInterface } from './models/interface';
-import HentaiModel from './models/Hentai.model';
 
 // Dotenv config
 require('dotenv').config();
@@ -91,7 +88,7 @@ const getPosts: Function = async (url: string, model: any) => {
 
 async function allPosts() {
   try {
-    await UnixModel.deleteMany({});
+    await UnixPornModel.deleteMany({});
     await MemeModel.deleteMany({});
     await NsfwModel.deleteMany({});
   } catch (error) {
@@ -104,7 +101,7 @@ async function allPosts() {
   getPosts(nsfwArray[2], NsfwModel);
   getPosts(nsfwArray[0], HentaiModel);
   getPosts(nsfwArray[2], HentaiModel);
-  getPosts(UNIXPORNURL, UnixModel);
+  getPosts(UNIXPORNURL, UnixPornModel);
 }
 
 allPosts();

@@ -1,10 +1,5 @@
 import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID } from 'graphql';
-
-import NsfwModel from '../models/Nsfw.model';
-import UnixPornModel from '../models/UnixPorn.model';
-import MemeModel from '../models/Meme.model';
-import HentaiModel from '../models/Hentai.model';
-import { resolve } from 'dns';
+import { NsfwModel, UnixPornModel, MemeModel, HentaiModel } from '../models/CacheModels';
 
 const CacheType = new GraphQLObjectType({
   name: 'Cache',
