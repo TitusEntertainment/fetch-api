@@ -64,7 +64,7 @@ const query = `
 const options = {
   method: 'POST',
   headers: { 'Content-type': 'application/json' },
-  body: JSON.stringify({ query })
+  body: JSON.stringify({ query }),
 };
 ```
 
@@ -86,12 +86,12 @@ const query = `
 const options = {
   method: 'POST',
   headers: { 'Content-type': 'application/json' },
-  body: JSON.stringify({ query })
+  body: JSON.stringify({ query }),
 };
 
 // note that the url bellow is what's hosted currently! If you self-host this url will be different
 
-fetch('http://titusentertainment.xyz:3200/api', options)
+fetch('http://titusentertainment.xyz/api', options)
   .then(res => res.json())
   .then(res => console.log(res.data));
 ```
