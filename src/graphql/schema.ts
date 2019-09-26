@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID } from 'graphql';
+import { GraphQLObjectType, GraphQLString, GraphQLSchema } from 'graphql';
 import { NsfwModel, UnixPornModel, MemeModel, HentaiModel } from '../models/CacheModels';
 
 const CacheType = new GraphQLObjectType({
@@ -16,21 +16,21 @@ const RootQuery: GraphQLObjectType = new GraphQLObjectType({
   fields: {
     meme: {
       type: CacheType,
-      async resolve(parent, args) {
+      async resolve() {
         const data = await MemeModel.find({});
         return data[Math.floor(Math.random() * data.length)];
       },
     },
     nsfw: {
       type: CacheType,
-      async resolve(parent, args) {
+      async resolve() {
         const data = await NsfwModel.find({});
         return data[Math.floor(Math.random() * data.length)];
       },
     },
     hentai: {
       type: CacheType,
-      async resolve(parents, args) {
+      async resolve() {
         const data = await HentaiModel.find({});
         return data[Math.floor(Math.random() * data.length)];
       },

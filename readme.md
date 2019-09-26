@@ -4,6 +4,10 @@ This open source api fetches and caches from a set of subreddits from [reddit](h
 
 > Want another subreddit to be cached? Make an issue, or a pull request.
 
+## There is now a npm package to making fetching with node a lot easier!
+
+check it out at: https://www.npmjs.com/package/@titus_entertainment/api
+
 **Current queries**:
 
 unixporn, nsfw, meme, hentai
